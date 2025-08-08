@@ -339,27 +339,35 @@ nav {
     text-align: left;
 }
 
-.testimonial-card::before {
-    content: '"';
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 4rem;
-    color: var(--light-gray);
-    font-family: serif;
-    line-height: 1;
-    z-index: 0;
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
 }
 
-.testimonial-card p {
-    position: relative;
-    z-index: 1;
+.testimonial-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+}
+
+.stars {
+    color: #FFD700;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
 }
 
 .testimonial-author {
     font-style: italic;
     color: var(--gray);
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 0.9rem;
 }
 
@@ -500,11 +508,21 @@ footer a:hover {
 
 @media (max-width: 900px) {
     .benefits-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 40px auto;
+    max-width: 1200px;
+}
+
+@media (max-width: 1024px) {
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 600px) {
     .benefits-grid {
-        grid-template-columns: 1fr; /* 1 colonne sur mobile */
+        grid-template-columns: 1fr;
     }
+}
