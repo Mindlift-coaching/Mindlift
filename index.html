@@ -1,108 +1,672 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindLift - Coaching Mental & Physique</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #ff7e5f;
+            --dark: #2a2d34;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-left: 10px;
+            color: var(--secondary);
+        }
+        
+        .logo-text span {
+            color: var(--accent);
+        }
+        
+        ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        ul li {
+            margin-left: 30px;
+        }
+        
+        ul li a {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--secondary);
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Sections */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .alt {
+            background-color: var(--light-gray);
+        }
+        
+        /* Qui suis-je */
+        #quisuisje {
+            text-align: center;
+        }
+        
+        #quisuisje p {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Coaching */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Pourquoi */
+        #pourquoi {
+            text-align: center;
+        }
+        
+        #pourquoi p {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .points {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .points li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .points li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        /* Témoignages */
+        #temoignages {
+            text-align: center;
+        }
+        
+        #temoignages .card {
+            position: relative;
+            text-align: left;
+        }
+        
+        #temoignages .card:before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--light-gray);
+            font-family: serif;
+            line-height: 1;
+            z-index: 0;
+        }
+        
+        #temoignages .card p {
+            position: relative;
+            z-index: 1;
+        }
+        
+        #temoignages .card p:last-child {
+            font-style: italic;
+            color: var(--gray);
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Contact */
+        #contact {
+            text-align: center;
+        }
+        
+        #contact p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        footer p {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        footer a {
+            color: var(--light-gray);
+        }
+        
+        footer a:hover {
+            color: var(--accent);
+        }
+        
+        .social-icons {
+            margin: 20px 0;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 20px 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding: 70px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- HEADER / MENU -->
-<header>
-    <nav>
-        <div class="logo">
-            <img src="logo-mindlift.png" alt="Logo MindLift" style="height: 50px;">
-        </div>
-        <ul>
-            <li><a href="#accueil">Accueil</a></li>
-            <li><a href="#quisuisje">Qui suis-je ?</a></li>
-            <li><a href="#coaching">Coaching</a></li>
-            <li><a href="#pourquoi">Pourquoi MindLift</a></li>
-            <li><a href="#temoignages">Témoignages</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+<header id="header">
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <img src="https://via.placeholder.com/150x50?text=MindLift" alt="Logo MindLift">
+                <div class="logo-text">Mind<span>Lift</span></div>
+            </div>
+            
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul id="menu">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#quisuisje">Qui suis-je ?</a></li>
+                <li><a href="#coaching">Coaching</a></li>
+                <li><a href="#pourquoi">Pourquoi MindLift</a></li>
+                <li><a href="#temoignages">Témoignages</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
 </header>
 
-<!-- BANNIÈRE IMAGE CONFIANCE -->
-<section id="banniere-confiance" style="width: 100%; overflow: hidden;">
-    <img src="confiance.png" alt="Bannière Confiance" style="width: 100%; height: auto; display: block;">
-</section>
-
-<!-- ACCUEIL -->
-<section id="accueil" class="hero" style="background-image: url('images/hero.jpg');">
-    <div class="overlay"></div>
+<!-- HERO SECTION -->
+<section id="accueil" class="hero">
     <div class="hero-content">
-        <h1>Révélez votre plein potentiel.</h1>
-        <p>Coaching mental & physique fondé sur l’exigence du haut niveau. Pour les sportifs, dirigeants, et personnes en transition de vie.</p>
+        <h1>Révélez votre plein potentiel</h1>
+        <p>Coaching mental & physique fondé sur l'exigence du haut niveau. Pour les sportifs, dirigeants et personnes en transition de vie.</p>
         <a href="#contact" class="btn">Faites le premier pas</a>
     </div>
 </section>
 
 <!-- QUI SUIS-JE -->
 <section id="quisuisje">
-    <h2>De la performance à la transformation</h2>
-    <p>Ancien sportif de haut niveau dans plusieurs disciplines, j’ai accompagné des athlètes professionnels, des chefs d’entreprise, et des personnes en quête de changement profond.
-    MindLift est né de cette expérience : une méthode unique mêlant coaching mental, préparation physique et travail sur la confiance, pour transformer vos objectifs en réalités concrètes.</p>
-    <a href="#contact" class="btn-secondary">En savoir plus</a>
+    <div class="container">
+        <h2>De la performance à la transformation</h2>
+        <p>Ancien sportif de haut niveau dans plusieurs disciplines, j'ai accompagné des athlètes professionnels, des chefs d'entreprise, et des personnes en quête de changement profond.</p>
+        <p>MindLift est né de cette expérience : une méthode unique mêlant coaching mental, préparation physique et travail sur la confiance, pour transformer vos objectifs en réalités concrètes.</p>
+        <a href="#contact" class="btn-secondary">En savoir plus</a>
+    </div>
 </section>
 
 <!-- COACHING -->
 <section id="coaching" class="alt">
-    <h2>Un accompagnement sur mesure</h2>
-    <p>Que vous prépariez une épreuve sportive, une prise de parole, une transition de vie ou que vous cherchiez à mieux vous connaître, je propose plusieurs formats adaptés à votre réalité.</p>
-    <div class="cards">
-        <div class="card"><h3>Coaching mental personnalisé</h3><p>Renforcez votre clarté, confiance et motivation.</p></div>
-        <div class="card"><h3>Préparation mentale & physique</h3><p>Un plan complet sur plusieurs mois vers vos objectifs.</p></div>
-        <div class="card"><h3>Recentrage & sérénité</h3><p>Pour retrouver équilibre, sens et énergie au quotidien.</p></div>
-        <div class="card"><h3>Sessions flash</h3><p>Une séance unique pour débloquer une problématique.</p></div>
+    <div class="container">
+        <h2>Un accompagnement sur mesure</h2>
+        <p>Que vous prépariez une épreuve sportive, une prise de parole, une transition de vie ou que vous cherchiez à mieux vous connaître, je propose plusieurs formats adaptés à votre réalité.</p>
+        
+        <div class="cards">
+            <div class="card">
+                <i class="fas fa-brain" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 20px;"></i>
+                <h3>Coaching mental personnalisé</h3>
+                <p>Renforcez votre clarté, confiance et motivation avec un programme taillé sur mesure.</p>
+            </div>
+            
+            <div class="card">
+                <i class="fas fa-dumbbell" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 20px;"></i>
+                <h3>Préparation mentale & physique</h3>
+                <p>Un plan complet sur plusieurs mois pour atteindre vos objectifs de performance.</p>
+            </div>
+            
+            <div class="card">
+                <i class="fas fa-balance-scale" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 20px;"></i>
+                <h3>Recentrage & sérénité</h3>
+                <p>Pour retrouver équilibre, sens et énergie dans votre quotidien.</p>
+            </div>
+            
+            <div class="card">
+                <i class="fas fa-bolt" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 20px;"></i>
+                <h3>Sessions flash</h3>
+                <p>Une séance unique pour débloquer une problématique spécifique rapidement.</p>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- POURQUOI MINDLIFT -->
 <section id="pourquoi">
-    <h2>Une méthode reconnue. Des résultats concrets.</h2>
-    <p>La méthode MindLift s’inspire des pratiques du sport de haut niveau, des neurosciences et du coaching professionnel. Elle est utilisée aussi bien dans le monde de l’entreprise que par des sportifs ou des familles.</p>
-    <ul class="points">
-        <li>🔥 Boost de motivation & discipline</li>
-        <li>🧘 Clarté mentale & gestion du stress</li>
-        <li>🧭 Reconnexion à ses valeurs</li>
-        <li>🎯 Atteinte d’objectifs mesurables</li>
-    </ul>
+    <div class="container">
+        <h2>Une méthode reconnue. Des résultats concrets.</h2>
+        <p>La méthode MindLift s'inspire des pratiques du sport de haut niveau, des neurosciences et du coaching professionnel. Elle est utilisée aussi bien dans le monde de l'entreprise que par des sportifs ou des familles.</p>
+        
+        <ul class="points">
+            <li>Boost de motivation & discipline</li>
+            <li>Clarté mentale & gestion du stress</li>
+            <li>Reconnexion à ses valeurs profondes</li>
+            <li>Atteinte d'objectifs mesurables</li>
+            <li>Développement de la confiance en soi</li>
+            <li>Optimisation des performances</li>
+        </ul>
+    </div>
 </section>
 
 <!-- TÉMOIGNAGES -->
 <section id="temoignages" class="alt">
-    <h2>Ce qu’ils en disent</h2>
-    <div class="cards">
-        <div class="card">⭐⭐⭐⭐⭐<p>"Grâce à MindLift, j’ai terminé mon marathon avec une confiance que je n’avais jamais connue. Un accompagnement ultra précis et humain."<br>— Mehdi, coureur amateur</p></div>
-        <div class="card"><p>"MindLift a su me recentrer et me redonner une direction claire. Son approche est à la fois bienveillante et percutante."<br>— Sarah, entrepreneure</p></div>
-        <div class="card"><p>"En tant que couple, nous avons retrouvé communication, projets communs et motivation grâce à MindLift."<br>— Clara & Julien</p></div>
-        <div class="card"><p>"En tant que maman, j’ai retrouvé un équilibre de vie et une organisation claire qui m’ont permis de reprendre confiance."<br>— Isabelle</p></div>
-        <div class="card"><p>"Depuis des années, MindLift m’accompagne dans ma carrière internationale. Confiance, bien-être, et titres mondiaux à la clé."<br>— Sportif de haut niveau</p></div>
+    <div class="container">
+        <h2>Ce qu'ils en disent</h2>
+        
+        <div class="cards">
+            <div class="card">
+                <div style="color: gold; margin-bottom: 10px;">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"Grâce à MindLift, j'ai terminé mon marathon avec une confiance que je n'avais jamais connue. Un accompagnement ultra précis et humain."</p>
+                <p>— Mehdi, coureur amateur</p>
+            </div>
+            
+            <div class="card">
+                <p>"MindLift a su me recentrer et me redonner une direction claire. Son approche est à la fois bienveillante et percutante. En quelques semaines seulement, j'ai pu reprendre le contrôle de ma vie professionnelle."</p>
+                <p>— Sarah, entrepreneure</p>
+            </div>
+            
+            <div class="card">
+                <p>"En tant que couple, nous avons retrouvé communication, projets communs et motivation grâce à MindLift. Le coaching nous a permis de nous aligner sur nos valeurs communes."</p>
+                <p>— Clara & Julien</p>
+            </div>
+            
+            <div class="card">
+                <p>"En tant que maman, j'ai retrouvé un équilibre de vie et une organisation claire qui m'ont permis de reprendre confiance en moi et en mes capacités."</p>
+                <p>— Isabelle</p>
+            </div>
+            
+            <div class="card">
+                <p>"Depuis des années, MindLift m'accompagne dans ma carrière internationale. Confiance, bien-être, et titres mondiaux à la clé. Un partenaire indispensable."</p>
+                <p>— Sportif de haut niveau</p>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-    <h2>Faites le premier pas.</h2>
-    <p>L’accompagnement commence par une première rencontre. Réservez un appel gratuit pour qu’on échange sur vos objectifs et comment je peux vous aider à les atteindre.</p>
-    <a href="mailto:contact@mindlift.fr" class="btn">Prenez Rendez-vous</a>
+    <div class="container">
+        <h2>Faites le premier pas.</h2>
+        <p>L'accompagnement commence par une première rencontre. Réservez un appel gratuit pour qu'on échange sur vos objectifs et comment je peux vous aider à les atteindre.</p>
+        <a href="mailto:contact@mindlift.fr" class="btn">Prenez Rendez-vous</a>
+        
+        <div style="margin-top: 50px;">
+            <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +33 6 12 34 56 78</p>
+            <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> contact@mindlift.fr</p>
+        </div>
+    </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-    <p>
-        <a href="#accueil">Accueil</a> | 
-        <a href="#quisuisje">À propos</a> | 
-        <a href="#coaching">Coaching</a> | 
-        <a href="#contact">Contact</a>
-    </p>
-    <p>Mentions légales | Politique de confidentialité</p>
-    <p>Email : contact@mindlift.fr</p>
+    <div class="container">
+        <div class="logo" style="justify-content: center; margin-bottom: 20px;">
+            <img src="https://via.placeholder.com/150x50?text=MindLift" alt="Logo MindLift" style="height: 40px;">
+            <div class="logo-text" style="font-size: 1.2rem;">Mind<span>Lift</span></div>
+        </div>
+        
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        
+        <p>
+            <a href="#accueil">Accueil</a> | 
+            <a href="#quisuisje">À propos</a> | 
+            <a href="#coaching">Coaching</a> | 
+            <a href="#contact">Contact</a>
+        </p>
+        
+        <p style="margin-top: 20px;">
+            <a href="#">Mentions légales</a> | 
+            <a href="#">Politique de confidentialité</a>
+        </p>
+        
+        <p style="margin-top: 30px; font-size: 0.8rem;">
+            &copy; 2023 MindLift. Tous droits réservés.
+        </p>
+    </div>
 </footer>
+
+<script>
+    // Menu mobile
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('#menu');
+    
+    menuToggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+    });
+    
+    // Fermer le menu quand on clique sur un lien
+    const menuLinks = document.querySelectorAll('#menu a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.remove('active');
+        });
+    });
+    
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
